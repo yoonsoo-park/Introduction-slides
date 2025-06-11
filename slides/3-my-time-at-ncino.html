@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Time at nCino</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: "Open Sans", sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      .slide {
+        width: 1280px;
+        min-height: 720px;
+        position: relative;
+        background: linear-gradient(135deg, #ffffff 0%, #f5f7fa 100%);
+        overflow: hidden;
+      }
+      h1,
+      h2,
+      h3 {
+        font-family: "Montserrat", sans-serif;
+      }
+      .accent-bar {
+        background: linear-gradient(90deg, #3b82f6, #2563eb);
+        height: 8px;
+        width: 120px;
+        margin-bottom: 20px;
+        border-radius: 4px;
+      }
+      .journey-card {
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.07);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+      .journey-card:hover {
+        transform: translateY(-5px);
+      }
+      .timeline-dot {
+        width: 14px;
+        height: 14px;
+        background-color: #3b82f6;
+        border-radius: 50%;
+        position: absolute;
+        left: -7px;
+        top: 24px;
+      }
+      .timeline-line {
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background-color: #e5e7eb;
+      }
+      .bg-pattern {
+        position: absolute;
+        top: -50px;
+        right: -50px;
+        width: 300px;
+        height: 300px;
+        background-color: rgba(59, 130, 246, 0.05);
+        border-radius: 50%;
+        z-index: 0;
+      }
+      .team-badge {
+        display: inline-block;
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        margin-right: 8px;
+        margin-bottom: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="slide flex flex-col p-16">
+      <!-- Decorative elements -->
+      <div
+        class="absolute top-0 right-0 h-2 w-full bg-gradient-to-r from-blue-500 to-indigo-600"
+      ></div>
+      <div class="bg-pattern"></div>
+
+      <!-- Header -->
+      <div class="mb-8">
+        <h1 class="text-5xl font-bold text-gray-800 mb-2">My Time at nCino</h1>
+        <div class="accent-bar"></div>
+        <p class="text-xl text-gray-700 mt-4">
+          Over the past 3 years, I've contributed to several teams and projects
+        </p>
+      </div>
+
+      <!-- Journey Content -->
+      <div class="flex-grow relative">
+        <!-- Timeline line -->
+        <div class="timeline-line ml-4"></div>
+
+        <div class="space-y-6 ml-12">
+          <!-- Salesforce Platform Team -->
+          <div class="journey-card p-6">
+            <div class="timeline-dot"></div>
+            <div class="flex items-start">
+              <div
+                class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mr-6"
+              >
+                <i class="fab fa-salesforce text-blue-600 text-3xl"></i>
+              </div>
+              <div class="flex-grow">
+                <span class="team-badge bg-blue-100 text-blue-800"
+                  >Initial Team</span
+                >
+                <h3 class="text-2xl font-bold text-gray-800 mt-1">
+                  Salesforce Platform Team
+                </h3>
+                <p class="text-lg text-gray-700 mt-2">
+                  Worked on the initial development of:
+                </p>
+                <div class="mt-3 flex flex-wrap">
+                  <div
+                    class="bg-gray-100 rounded-lg p-4 mr-4 mb-4 w-48 flex items-center"
+                  >
+                    <i class="fas fa-cogs text-blue-500 text-xl mr-3"></i>
+                    <span class="text-gray-800">Feature Management</span>
+                  </div>
+                  <div
+                    class="bg-gray-100 rounded-lg p-4 mr-4 mb-4 w-48 flex items-center"
+                  >
+                    <i
+                      class="fas fa-project-diagram text-blue-500 text-xl mr-3"
+                    ></i>
+                    <span class="text-gray-800">Metaman</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Environment Provisioning Team -->
+          <div class="journey-card p-6">
+            <div class="timeline-dot"></div>
+            <div class="flex items-start">
+              <div
+                class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mr-6"
+              >
+                <i class="fas fa-server text-green-600 text-3xl"></i>
+              </div>
+              <div class="flex-grow">
+                <span class="team-badge bg-green-100 text-green-800"
+                  >Team Transition - Provisioning</span
+                >
+                <h3 class="text-2xl font-bold text-gray-800 mt-1">
+                  Environment Provisioning Team
+                </h3>
+                <p class="text-lg text-gray-700 mt-2">
+                  Successfully delivered State Provision & expanded
+                  responsibilities
+                </p>
+                <div class="mt-3">
+                  <p class="text-md text-gray-600">
+                    As the team grew, we absorbed OrgFarm and took on several
+                    new projects:
+                  </p>
+                  <div class="flex flex-wrap mt-3">
+                    <div
+                      class="bg-gray-100 rounded-lg p-3 mr-3 mb-3 flex items-center"
+                    >
+                      <i class="fas fa-magic text-green-500 mr-2"></i>
+                      <span>state-provision</span>
+                    </div>
+                    <div
+                      class="bg-gray-100 rounded-lg p-3 mr-3 mb-3 flex items-center"
+                    >
+                      <i class="fas fa-calculator text-green-500 mr-2"></i>
+                      <span>idCalc</span>
+                    </div>
+                    <div
+                      class="bg-gray-100 rounded-lg p-3 mr-3 mb-3 flex items-center"
+                    >
+                      <i class="fas fa-database text-green-500 mr-2"></i>
+                      <span>record-retriever</span>
+                    </div>
+                    <div
+                      class="bg-gray-100 rounded-lg p-3 mr-3 mb-3 flex items-center"
+                    >
+                      <i class="fas fa-terminal text-green-500 mr-2"></i>
+                      <span>ncino-cli</span>
+                    </div>
+                    <div
+                      class="bg-gray-100 rounded-lg p-3 mr-3 mb-3 flex items-center"
+                    >
+                      <i class="fas fa-project-diagram text-green-500 mr-2"></i>
+                      <span>Metaman v2</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Environment Administration Team -->
+          <div class="journey-card p-6">
+            <div class="timeline-dot"></div>
+            <div class="flex items-start">
+              <div
+                class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0 mr-6"
+              >
+                <i class="fas fa-users text-purple-600 text-3xl"></i>
+              </div>
+              <div class="flex-grow">
+                <span class="team-badge bg-purple-100 text-purple-800"
+                  >Team Transition - Admin</span
+                >
+                <h3 class="text-2xl font-bold text-gray-800 mt-1">
+                  Environment Administration Team
+                </h3>
+                <p class="text-lg text-gray-700 mt-2">
+                  Key deliverables and innovations:
+                </p>
+                <div class="grid grid-cols-2 gap-4 mt-3">
+                  <div
+                    class="bg-white border border-gray-200 rounded-lg p-4 shadow-sm"
+                  >
+                    <div class="flex items-center">
+                      <div
+                        class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center mr-3"
+                      >
+                        <i class="fas fa-desktop text-purple-600"></i>
+                      </div>
+                      <h4 class="text-lg font-semibold">Admin Control Plane</h4>
+                    </div>
+                    <p class="text-sm text-gray-600 mt-2">
+                      Delivered the first phase of ACP
+                    </p>
+                  </div>
+                  <div
+                    class="bg-white border border-gray-200 rounded-lg p-4 shadow-sm"
+                  >
+                    <div class="flex items-center">
+                      <div
+                        class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center mr-3"
+                      >
+                        <i class="fas fa-lightbulb text-purple-600"></i>
+                      </div>
+                      <h4 class="text-lg font-semibold">Admin Advisor</h4>
+                    </div>
+                    <p class="text-sm text-gray-600 mt-2">
+                      Based on the Banking Advisor
+                    </p>
+                  </div>
+                  <div
+                    class="bg-white border border-gray-200 rounded-lg p-4 shadow-sm col-span-2"
+                  >
+                    <div class="flex items-center">
+                      <div
+                        class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center mr-3"
+                      >
+                        <i class="fas fa-robot text-purple-600"></i>
+                      </div>
+                      <h4 class="text-lg font-semibold">
+                        AI Innovation with n8n
+                      </h4>
+                    </div>
+                    <p class="text-sm text-gray-600 mt-2">
+                      Officially introduced n8n to nCino during ACP AI features
+                      brainstorming. Demonstrated RAG through a chatting
+                      interface using an n8n workflow.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Current Team -->
+          <div class="journey-card p-6">
+            <div class="timeline-dot"></div>
+            <div class="flex items-start">
+              <div
+                class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0 mr-6"
+              >
+                <i class="fas fa-brain text-red-600 text-3xl"></i>
+              </div>
+              <div class="flex-grow">
+                <span class="team-badge bg-red-100 text-red-800"
+                  >Current Team</span
+                >
+                <h3 class="text-2xl font-bold text-gray-800 mt-1">
+                  AI Enablement Team - Current
+                </h3>
+                <p class="text-lg text-gray-700 mt-2">
+                  Worked on the initial development of:
+                </p>
+                <div class="mt-3 flex flex-wrap">
+                  <div
+                    class="bg-gray-100 rounded-lg p-4 mr-4 mb-4 w-48 flex items-center"
+                  >
+                    <i class="fas fa-cogs text-red-500 text-xl mr-3"></i>
+                    <span class="text-gray-800">n8n</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Experience summary -->
+        <div class="mt-4 text-right">
+          <p class="text-xl font-semibold text-gray-700">
+            <span class="text-gray-600">3 years</span> of growth and innovation
+            at nCino
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

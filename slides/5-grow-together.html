@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>How We Can Succeed Together</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: "Open Sans", sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      .slide {
+        width: 1280px;
+        min-height: 720px;
+        position: relative;
+        background: linear-gradient(135deg, #ffffff 0%, #f5f7fa 100%);
+        overflow: hidden;
+      }
+      h1,
+      h2,
+      h3 {
+        font-family: "Montserrat", sans-serif;
+      }
+      .accent-bar {
+        background: linear-gradient(90deg, #3b82f6, #2563eb);
+        height: 8px;
+        width: 120px;
+        margin-bottom: 20px;
+        border-radius: 4px;
+      }
+      .success-card {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.07);
+        transition: all 0.3s ease;
+      }
+      .success-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+      }
+      .bg-pattern {
+        position: absolute;
+        top: -50px;
+        left: -50px;
+        width: 300px;
+        height: 300px;
+        background-color: rgba(59, 130, 246, 0.05);
+        border-radius: 50%;
+        z-index: 0;
+      }
+      .connector {
+        height: 6px;
+        background: linear-gradient(90deg, #3b82f6, #2563eb);
+        position: relative;
+        margin: 20px 0;
+      }
+      .connector::before,
+      .connector::after {
+        content: "";
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        background-color: #2563eb;
+        border-radius: 50%;
+        top: -5px;
+      }
+      .connector::before {
+        left: 0;
+      }
+      .connector::after {
+        right: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="slide flex flex-col p-16">
+      <!-- Decorative elements -->
+      <div
+        class="absolute top-0 right-0 h-2 w-full bg-gradient-to-r from-blue-500 to-indigo-600"
+      ></div>
+      <div class="bg-pattern"></div>
+
+      <!-- Header -->
+      <div class="mb-8">
+        <h1 class="text-5xl font-bold text-gray-800 mb-2">
+          How We Can Succeed Together
+        </h1>
+        <div class="accent-bar"></div>
+      </div>
+
+      <!-- Collaborative Philosophy Content -->
+      <div class="flex flex-col items-center justify-center flex-grow">
+        <div class="success-card p-8 mb-10 w-full max-w-4xl">
+          <div class="flex items-center mb-6">
+            <div
+              class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mr-6"
+            >
+              <i class="fas fa-handshake text-blue-600 text-3xl"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-800">
+              A Market-Like System of Mutual Benefit
+            </h3>
+          </div>
+          <p class="text-lg text-gray-700">
+            I believe in creating collaborative relationships where both parties
+            gain value and grow together. My approach to teamwork is built on
+            the foundation of mutual success.
+          </p>
+        </div>
+
+        <!-- Two-way relationship illustration -->
+        <div class="grid grid-cols-2 gap-16 w-full max-w-4xl">
+          <!-- What I can do for you -->
+          <div class="success-card p-6 relative">
+            <div
+              class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-blue-600 text-white px-6 py-2 rounded-full font-semibold"
+            >
+              My Contribution to You
+            </div>
+            <div class="pt-6">
+              <div class="flex items-center mb-4 mt-2">
+                <div
+                  class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-3"
+                >
+                  <i class="fas fa-puzzle-piece text-blue-600"></i>
+                </div>
+                <p class="text-gray-800 font-semibold">
+                  Understanding your goals
+                </p>
+              </div>
+              <div class="flex items-center mb-4">
+                <div
+                  class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-3"
+                >
+                  <i class="fas fa-tools text-blue-600"></i>
+                </div>
+                <p class="text-gray-800 font-semibold">
+                  Supporting your path to success
+                </p>
+              </div>
+              <div class="flex items-center">
+                <div
+                  class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-3"
+                >
+                  <i class="fas fa-rocket text-blue-600"></i>
+                </div>
+                <p class="text-gray-800 font-semibold">
+                  Applying my skills to help you thrive
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- What you can do for me -->
+          <div class="success-card p-6 relative">
+            <div
+              class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-blue-600 text-white px-6 py-2 rounded-full font-semibold"
+            >
+              Your Support for Me
+            </div>
+            <div class="pt-6">
+              <div class="flex items-center mb-4 mt-2">
+                <div
+                  class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-3"
+                >
+                  <i class="fas fa-lightbulb text-blue-600"></i>
+                </div>
+                <p class="text-gray-800 font-semibold">Professional growth</p>
+              </div>
+              <div class="flex items-center mb-4">
+                <div
+                  class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-3"
+                >
+                  <i class="fas fa-comments text-blue-600"></i>
+                </div>
+                <p class="text-gray-800 font-semibold">
+                  Open feedback and communication
+                </p>
+              </div>
+              <div class="flex items-center">
+                <div
+                  class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-3"
+                >
+                  <i class="fas fa-chart-line text-blue-600"></i>
+                </div>
+                <p class="text-gray-800 font-semibold">
+                  Opportunities to advance my goals
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Connector between boxes -->
+        <div class="connector w-32 my-4"></div>
+
+        <!-- Final statement -->
+        <div class="mt-8 text-center max-w-2xl">
+          <p class="text-xl text-blue-800 font-semibold italic">
+            "By understanding each other's aspirations and supporting mutual
+            growth, we can create a partnership that leads to collective
+            success."
+          </p>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="mt-4 text-right text-gray-500">
+        <p>Yoonsoo Park | YOPA guarantee 👍</p>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Yoonsoo Park - Introduction Presentation</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: "Open Sans", sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #1e1e1e;
+        overflow: hidden;
+        cursor: none;
+      }
+
+      .presentation-container {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .slide-frame {
+        width: 1280px;
+        height: 720px;
+        border: none;
+        border-radius: 8px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        transform-origin: center;
+        transition: transform 0.3s ease;
+      }
+
+      .controls {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        background: rgba(0, 0, 0, 0.8);
+        padding: 12px 20px;
+        border-radius: 25px;
+        backdrop-filter: blur(10px);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: 1000;
+      }
+
+      .controls.visible {
+        opacity: 1;
+      }
+
+      .control-btn {
+        background: rgba(255, 255, 255, 0.1);
+        border: none;
+        color: white;
+        padding: 8px 12px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+
+      .control-btn:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+      }
+
+      .control-btn:disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
+      }
+
+      .slide-counter {
+        color: white;
+        font-size: 14px;
+        padding: 0 10px;
+      }
+
+      .progress-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 3px;
+        background: linear-gradient(90deg, #3b82f6, #2563eb);
+        transition: width 0.3s ease;
+        z-index: 1001;
+      }
+
+      .loading {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        font-size: 18px;
+        z-index: 999;
+      }
+
+      .welcome-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: linear-gradient(135deg, #1e1e1e 0%, #2d3748 100%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 2000;
+        transition: opacity 0.5s ease;
+      }
+
+      .welcome-content {
+        text-align: center;
+        color: white;
+      }
+
+      .start-btn {
+        background: linear-gradient(90deg, #3b82f6, #2563eb);
+        color: white;
+        border: none;
+        padding: 12px 30px;
+        border-radius: 25px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 20px;
+        transition: all 0.3s ease;
+      }
+
+      .start-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
+      }
+
+      .help-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.9);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 3000;
+      }
+
+      .help-content {
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        max-width: 500px;
+        text-align: center;
+      }
+
+      .keyboard-shortcuts {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin: 20px 0;
+        text-align: left;
+      }
+
+      .shortcut {
+        display: flex;
+        justify-content: space-between;
+        padding: 5px;
+        border-bottom: 1px solid #eee;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      /* Responsive scaling */
+      @media (max-width: 1400px) {
+        .slide-frame {
+          transform: scale(0.8);
+        }
+      }
+
+      @media (max-width: 1100px) {
+        .slide-frame {
+          transform: scale(0.6);
+        }
+      }
+
+      @media (max-width: 900px) {
+        .slide-frame {
+          transform: scale(0.5);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Welcome Screen -->
+    <div id="welcomeScreen" class="welcome-screen">
+      <div class="welcome-content">
+        <h1
+          style="
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+          "
+        >
+          Introduction Presentation
+        </h1>
+        <h2 style="font-size: 1.5rem; margin-bottom: 2rem; opacity: 0.8">
+          Yoonsoo Park
+        </h2>
+        <p style="margin-bottom: 1rem; opacity: 0.7">
+          Use arrow keys, space bar, or on-screen controls to navigate
+        </p>
+        <p style="margin-bottom: 2rem; opacity: 0.7">
+          Press 'H' for help, 'F' for fullscreen, 'ESC' to exit fullscreen
+        </p>
+        <button id="startBtn" class="start-btn">
+          <i class="fas fa-play mr-2"></i>
+          Start Presentation
+        </button>
+      </div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div id="progressBar" class="progress-bar" style="width: 0%"></div>
+
+    <!-- Loading Indicator -->
+    <div id="loading" class="loading hidden">
+      <i class="fas fa-spinner fa-spin mr-2"></i>
+      Loading slide...
+    </div>
+
+    <!-- Main Presentation Container -->
+    <div class="presentation-container">
+      <iframe id="slideFrame" class="slide-frame" src=""></iframe>
+    </div>
+
+    <!-- Controls -->
+    <div id="controls" class="controls">
+      <button id="prevBtn" class="control-btn">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+
+      <button id="playPauseBtn" class="control-btn">
+        <i class="fas fa-pause"></i>
+      </button>
+
+      <span id="slideCounter" class="slide-counter">1 / 5</span>
+
+      <button id="nextBtn" class="control-btn">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+
+      <button id="fullscreenBtn" class="control-btn">
+        <i class="fas fa-expand"></i>
+      </button>
+
+      <button id="helpBtn" class="control-btn">
+        <i class="fas fa-question"></i>
+      </button>
+    </div>
+
+    <!-- Help Overlay -->
+    <div id="helpOverlay" class="help-overlay">
+      <div class="help-content">
+        <h3 style="margin-bottom: 20px">Keyboard Shortcuts</h3>
+        <div class="keyboard-shortcuts">
+          <div class="shortcut">
+            <span><strong>→ / Space</strong></span>
+            <span>Next slide</span>
+          </div>
+          <div class="shortcut">
+            <span><strong>← / Backspace</strong></span>
+            <span>Previous slide</span>
+          </div>
+          <div class="shortcut">
+            <span><strong>F</strong></span>
+            <span>Toggle fullscreen</span>
+          </div>
+          <div class="shortcut">
+            <span><strong>H</strong></span>
+            <span>Show/hide help</span>
+          </div>
+          <div class="shortcut">
+            <span><strong>ESC</strong></span>
+            <span>Exit fullscreen</span>
+          </div>
+          <div class="shortcut">
+            <span><strong>Home</strong></span>
+            <span>First slide</span>
+          </div>
+          <div class="shortcut">
+            <span><strong>End</strong></span>
+            <span>Last slide</span>
+          </div>
+          <div class="shortcut">
+            <span><strong>1-5</strong></span>
+            <span>Jump to slide</span>
+          </div>
+        </div>
+        <button
+          onclick="toggleHelp()"
+          style="
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+          "
+        >
+          Close
+        </button>
+      </div>
+    </div>
+
+    <script src="presentation.js"></script>
+  </body>
+</html>

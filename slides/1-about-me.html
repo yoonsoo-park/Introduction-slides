@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Me - Yoonsoo Park</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: "Open Sans", sans-serif;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+      }
+      .slide {
+        width: 1280px;
+        min-height: 720px;
+        position: relative;
+        background: linear-gradient(135deg, #ffffff 0%, #f5f7fa 100%);
+      }
+      h1,
+      h2,
+      h3 {
+        font-family: "Montserrat", sans-serif;
+      }
+      .accent-bar {
+        background: linear-gradient(90deg, #3b82f6, #2563eb);
+        height: 8px;
+        width: 120px;
+        margin-bottom: 20px;
+        border-radius: 4px;
+      }
+      .profile-photo {
+        width: 280px;
+        height: 280px;
+        border-radius: 50%;
+        border: 4px solid #3b82f6;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        object-fit: cover;
+      }
+      .pets-photo {
+        width: 300px;
+        height: 200px;
+        border-radius: 12px;
+        border: 3px solid #3b82f6;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        object-fit: cover;
+        margin-top: 20px;
+      }
+      .world-map {
+        position: absolute;
+        bottom: 30px;
+        right: 30px;
+        opacity: 0.1;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="slide flex flex-col p-16 overflow-hidden">
+      <!-- Decorative elements -->
+      <div
+        class="absolute top-0 right-0 h-2 w-full bg-gradient-to-r from-blue-500 to-indigo-600"
+      ></div>
+
+      <div class="flex items-center justify-between mb-8">
+        <!-- Title section -->
+        <div class="w-2/3">
+          <h1 class="text-5xl font-bold text-gray-800 mb-2">About Me</h1>
+          <div class="accent-bar"></div>
+        </div>
+      </div>
+
+      <!-- Main content -->
+      <div class="flex items-center justify-between">
+        <!-- Profile Photo -->
+        <div class="flex-shrink-0 mr-16">
+          <img
+            src="../public/yoonsoo-lacy.JPEG"
+            alt="Yoonsoo Park and his wife"
+            class="profile-photo"
+          />
+        </div>
+
+        <!-- Personal information -->
+        <div class="flex-grow">
+          <!-- Introduction -->
+          <p class="text-2xl leading-relaxed text-gray-700 mb-8">
+            My name is
+            <span class="font-semibold text-blue-700">Yoonsoo Park</span> | From
+            <span class="font-semibold text-gray-700">South Korea 🇰🇷</span>.
+          </p>
+
+          <!-- Family Section -->
+          <div class="bg-blue-50 p-6 rounded-lg mb-8">
+            <h3
+              class="text-xl font-semibold text-blue-800 mb-4 flex items-center"
+            >
+              <i class="fas fa-heart text-blue-600 mr-3"></i>
+              My Family - Core Motivation
+            </h3>
+            <p class="text-xl leading-relaxed text-gray-700 mb-4">
+              <span class="font-semibold text-blue-700">My family</span> (wife,
+              2 dogs, 1 cat) is my core motivation.
+            </p>
+            <!-- Family Pets Photo -->
+            <div class="flex justify-center">
+              <img
+                src="../public/pets.JPEG"
+                alt="Our family pets - two dogs and one cat"
+                class="pets-photo"
+              />
+            </div>
+          </div>
+
+          <!-- Dedication Section -->
+          <div class="bg-gray-50 p-6 rounded-lg mb-8">
+            <h3
+              class="text-xl font-semibold text-gray-800 mb-4 flex items-center"
+            >
+              <i class="fas fa-code text-gray-600 mr-3"></i>
+              Technical Dedication
+            </h3>
+            <div class="flex items-center">
+              <div class="bg-gray-100 p-3 rounded-full mr-4">
+                <i class="fas fa-robot text-gray-500 text-2xl"></i>
+              </div>
+              <p class="text-xl leading-relaxed text-gray-700">
+                Dedicated to integrating
+                <span class="font-semibold text-blue-600">AI</span> into daily
+                development.
+                <br />
+                <span class="text-lg text-gray-600"
+                  >MCP Server, Agentic Development (A2A, AG-UI ...)</span
+                >
+              </p>
+            </div>
+          </div>
+
+          <!-- AWS Community Builder Section -->
+          <div class="bg-orange-50 p-6 rounded-lg mb-8">
+            <h3
+              class="text-xl font-semibold text-orange-800 mb-4 flex items-center"
+            >
+              <i class="fa-solid fa-users text-orange-600 mr-3"></i>
+              Community Activity
+            </h3>
+            <div class="flex items-center">
+              <div class="bg-orange-100 p-3 rounded-full mr-4">
+                <i class="fab fa-aws text-orange-500 text-2xl"></i>
+              </div>
+              <p class="text-xl leading-relaxed text-gray-700">
+                <span class="font-semibold text-blue-600"
+                  >AWS Community Builder 2025</span
+                >
+                <br />
+                <span class="text-lg text-gray-600"
+                  >Accessing early AWS product insights and sponsorship.</span
+                >
+              </p>
+            </div>
+          </div>
+
+          <!-- Global Experience Section -->
+          <div>
+            <p class="text-xl leading-relaxed text-gray-700 mb-4">
+              I've had the enriching experience of living in several countries:
+            </p>
+            <div class="flex justify-start gap-6">
+              <div class="bg-white p-4 rounded-lg shadow-md text-center w-32">
+                <i class="fas fa-globe-africa text-grey-500 text-2xl mb-2"></i>
+                <p class="font-semibold">Libya 🇱🇾</p>
+              </div>
+              <div class="bg-white p-4 rounded-lg shadow-md text-center w-32">
+                <i class="fas fa-globe-asia text-grey-500 text-2xl mb-2"></i>
+                <p class="font-semibold">S.Korea 🇰🇷</p>
+              </div>
+              <div class="bg-white p-4 rounded-lg shadow-md text-center w-32">
+                <i class="fas fa-globe-asia text-grey-500 text-2xl mb-2"></i>
+                <p class="font-semibold">Japan 🇯🇵</p>
+              </div>
+              <div class="bg-white p-4 rounded-lg shadow-md text-center w-32">
+                <i
+                  class="fas fa-globe-americas text-grey-500 text-2xl mb-2"
+                ></i>
+                <p class="font-semibold">U.S. 🇺🇸</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Decorative world map -->
+      <div class="world-map">
+        <i class="fas fa-globe-americas text-9xl"></i>
+      </div>
+    </div>
+  </body>
+</html>
