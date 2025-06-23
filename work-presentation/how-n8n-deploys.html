@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Visual Deployment Flow</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #f8fafc;
+      }
+      .phase-card {
+        background-color: white;
+        border-radius: 0.75rem;
+        border: 1px solid #e2e8f0;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1),
+          0 2px 4px -2px rgb(0 0 0 / 0.1);
+      }
+      .phase-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #1e293b;
+        margin-bottom: 1rem;
+        border-bottom: 2px solid #6366f1;
+        padding-bottom: 0.5rem;
+      }
+      .actor-box {
+        background-color: #eef2ff;
+        color: #4338ca;
+        border: 2px solid #818cf8;
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+        font-weight: 600;
+        display: inline-block;
+        margin-bottom: 1rem;
+      }
+      .component-box {
+        background-color: #f1f5f9;
+        border: 1px solid #cbd5e1;
+        border-radius: 0.5rem;
+        padding: 1rem;
+        text-align: center;
+        position: relative;
+      }
+      .component-title {
+        font-weight: 600;
+        color: #334155;
+      }
+      .arrow {
+        position: relative;
+        text-align: center;
+        padding: 1rem 0;
+        color: #64748b;
+        font-style: italic;
+      }
+      .arrow::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: -5px;
+        transform: translateX(-50%);
+        width: 0;
+        height: 0;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-top: 12px solid #94a3b8;
+      }
+      .status-badge {
+        padding: 0.25rem 0.75rem;
+        border-radius: 9999px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        display: inline-block;
+        margin-left: 0.75rem;
+      }
+      .status-completed {
+        background-color: #dcfce7;
+        color: #166534;
+      }
+      .status-partial {
+        background-color: #fef9c3;
+        color: #854d0e;
+      }
+      .status-blocked {
+        background-color: #fee2e2;
+        color: #991b1b;
+      }
+      .icon {
+        height: 2.5rem;
+        width: 2.5rem;
+        margin: 0 auto 0.5rem auto;
+        color: #4f46e5;
+      }
+      .connector-line {
+        width: 2px;
+        background-color: #cbd5e1;
+        margin: 0 auto;
+      }
+      .challenge-box {
+        border-left: 4px solid #f87171;
+        background-color: #fef2f2;
+        padding: 0.75rem;
+        border-radius: 0.25rem;
+        margin-top: 0.75rem;
+        color: #991b1b;
+        font-size: 0.875rem;
+      }
+      .k8s-cluster {
+        border: 2px dashed #6366f1;
+        background-color: rgba(238, 242, 255, 0.5);
+        padding: 1.5rem;
+        border-radius: 0.75rem;
+        margin-top: 1.5rem;
+      }
+    </style>
+  </head>
+  <body class="p-4 sm:p-6 lg:p-8">
+    <div class="max-w-6xl mx-auto">
+      <h1 class="text-3xl font-bold text-center text-gray-800 mb-2">
+        n8n Deployment Process
+      </h1>
+      <p class="text-center text-gray-500 mb-8">
+        A visual breakdown of the infrastructure and application deployment
+        flow.
+      </p>
+
+      <!-- Phase 1 -->
+      <div class="phase-card">
+        <div class="flex items-center">
+          <h2 class="phase-title">Phase 1: Foundation & Bootstrap</h2>
+          <span class="status-badge status-completed">Completed</span>
+        </div>
+        <p class="text-gray-600 mb-4">
+          A one-time setup to create the backend for Terraform to store its
+          state securely and prevent conflicts.
+        </p>
+        <div
+          class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-8"
+        >
+          <div class="component-box w-full md:w-1/4">
+            <svg
+              class="icon"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
+              ></path>
+            </svg>
+            <p class="component-title">DevOps Engineer</p>
+            <p class="text-sm text-gray-500">Runs bootstrap script</p>
+          </div>
+          <div class="arrow w-full md:w-auto">`bootstrap-remote-state.sh`</div>
+          <div class="flex space-x-4">
+            <div class="component-box flex-1">
+              <svg
+                class="icon"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"
+                />
+              </svg>
+              <p class="component-title">AWS S3 Bucket</p>
+              <p class="text-sm text-gray-500">Stores Terraform State</p>
+            </div>
+            <div class="component-box flex-1">
+              <svg
+                class="icon"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"
+                />
+              </svg>
+              <p class="component-title">AWS DynamoDB</p>
+              <p class="text-sm text-gray-500">Locks state file</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phase 2 -->
+      <div class="phase-card">
+        <div class="flex items-center">
+          <h2 class="phase-title">Phase 2: Core Infrastructure Deployment</h2>
+          <span class="status-badge status-partial">Partially Blocked</span>
+        </div>
+        <p class="text-gray-600 mb-6">
+          Terraform provisions the foundational AWS infrastructure. Some
+          components are blocked by organization-level security policies (SCPs).
+        </p>
+        <div class="flex items-start">
+          <div class="w-1/4">
+            <div class="actor-box">Actor: Terraform</div>
+            <div class="component-box">
+              <svg
+                class="icon"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M13.5 16.875h3.375m0 0h3.375m-3.375 0V13.5m0 3.375v3.375M6 10.5h2.25a2.25 2.25 0 002.25-2.25V6a2.25 2.25 0 00-2.25-2.25H6A2.25 2.25 0 003.75 6v2.25A2.25 2.25 0 006 10.5zm0 9.75h2.25A2.25 2.25 0 0010.5 18v-2.25a2.25 2.25 0 00-2.25-2.25H6a2.25 2.25 0 00-2.25 2.25v2.25A2.25 2.25 0 006 20.25z"
+                />
+              </svg>
+              <p class="component-title">`terraform apply`</p>
+            </div>
+          </div>
+
+          <div class="flex-1 ml-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="component-box">
+                <p class="component-title">VPC Infrastructure</p>
+                <p class="text-sm text-gray-500">
+                  Creates Subnets, NAT Gateways, Route Tables.
+                </p>
+              </div>
+              <div class="component-box">
+                <p class="component-title">Aurora PostgreSQL</p>
+                <p class="text-sm text-gray-500">
+                  Deploys Serverless v2 database cluster for a tenant.
+                </p>
+              </div>
+              <div class="component-box">
+                <p class="component-title">EKS Cluster</p>
+                <p class="text-sm text-gray-500">
+                  Deploys Kubernetes control plane and node group roles.
+                </p>
+                <div class="challenge-box">
+                  <strong>Challenge:</strong> OIDC Provider creation for IRSA is
+                  blocked by an SCP.
+                </div>
+              </div>
+              <div class="component-box">
+                <p class="component-title">Karpenter (via Helm)</p>
+                <p class="text-sm text-gray-500">
+                  Deploys node auto-scaler into EKS.
+                </p>
+                <div class="challenge-box">
+                  <strong>CRITICAL BLOCKER:</strong> `ec2:RunInstances` is
+                  denied by an SCP, preventing all node scaling.
+                </div>
+              </div>
+              <div class="component-box col-span-1 md:col-span-2">
+                <p class="component-title">ArgoCD (via Helm)</p>
+                <p class="text-sm text-gray-500">
+                  Deploys the GitOps controller into EKS, which will manage
+                  Phase 3.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phase 3 -->
+      <div class="phase-card">
+        <div class="flex items-center">
+          <h2 class="phase-title">Phase 3: Application Deployment (GitOps)</h2>
+          <span class="status-badge status-partial"
+            >Operational with Workarounds</span
+          >
+        </div>
+        <p class="text-gray-600 mb-6">
+          ArgoCD automatically deploys the n8n application stack from a Git
+          repository into the EKS cluster.
+        </p>
+
+        <div
+          class="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0 md:space-x-8"
+        >
+          <div class="component-box w-full md:w-1/4">
+            <svg
+              class="icon"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5"
+              />
+            </svg>
+            <p class="component-title">Git Repository</p>
+            <p class="text-sm text-gray-500">Source of Truth</p>
+          </div>
+          <div class="arrow w-full md:w-auto">ArgoCD Monitors & Syncs</div>
+          <div class="flex-1">
+            <div class="actor-box">Actor: ArgoCD</div>
+            <p class="text-gray-600 mb-4">
+              Deploys resources into EKS using sync-waves for order.
+            </p>
+          </div>
+        </div>
+
+        <div class="k8s-cluster">
+          <p class="text-lg font-semibold text-center text-indigo-700 mb-6">
+            Inside the EKS Cluster
+          </p>
+
+          <!-- Sync Wave 0 -->
+          <div class="text-center">
+            <div class="component-box inline-block">
+              <p class="component-title">
+                Sync-Wave 0: External Secrets Operator
+              </p>
+              <p class="text-sm text-gray-500">
+                Fetches secrets from AWS Secrets Manager.
+              </p>
+              <div class="challenge-box">
+                <strong>Workaround:</strong> IRSA is blocked, so secrets are
+                created manually. This is a GitOps violation.
+              </div>
+            </div>
+          </div>
+          <div class="h-12 w-0.5 bg-gray-300 mx-auto"></div>
+          <!-- Vertical Connector -->
+
+          <!-- Sync Wave 1 -->
+          <div class="text-center">
+            <div class="component-box inline-block">
+              <p class="component-title">Sync-Wave 1: Kubernetes Secrets</p>
+              <p class="text-sm text-gray-500">
+                Intended to be managed by ESO.
+              </p>
+            </div>
+          </div>
+          <div class="h-12 w-0.5 bg-gray-300 mx-auto"></div>
+          <!-- Vertical Connector -->
+
+          <!-- Sync Wave 2 -->
+          <div class="text-center">
+            <div class="component-box">
+              <p class="component-title mb-4">
+                Sync-Wave 2: n8n Tenant Stack (Helm Chart)
+              </p>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="component-box bg-white">
+                  <p class="font-semibold text-indigo-600">n8n Main Pod</p>
+                  <p class="text-sm">UI, API, Triggers</p>
+                </div>
+                <div class="component-box bg-white">
+                  <p class="font-semibold text-indigo-600">n8n Worker Pod</p>
+                  <p class="text-sm">Processes Workflows</p>
+                </div>
+                <div class="component-box bg-white">
+                  <p class="font-semibold text-indigo-600">Valkey (Queue)</p>
+                  <p class="text-sm">High-performance queue</p>
+                </div>
+              </div>
+              <div class="challenge-box mt-4 text-left">
+                <strong>Production Readiness Blockers:</strong>
+                <ul class="list-disc list-inside mt-2">
+                  <li>
+                    <strong>Persistence Disabled:</strong> Using ephemeral
+                    storage due to missing EBS CSI Driver. Data is lost on pod
+                    restart.
+                  </li>
+                  <li>
+                    <strong>Manual Patches:</strong> Required fixes to
+                    ConfigMaps and Service Accounts, violating GitOps
+                    principles.
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
