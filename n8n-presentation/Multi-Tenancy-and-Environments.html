@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Visual Guide: Multi-Tenancy & Environments</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #f8fafc;
+        color: #334155;
+      }
+      .card {
+        background-color: white;
+        border-radius: 0.75rem;
+        border: 1px solid #e2e8f0;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1),
+          0 2px 4px -2px rgb(0 0 0 / 0.1);
+      }
+      .card-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #1e293b;
+        margin-bottom: 1rem;
+        border-bottom: 2px solid #6366f1;
+        padding-bottom: 0.5rem;
+      }
+      .aws-account-card {
+        border: 2px dashed;
+        padding: 1.5rem;
+        border-radius: 0.75rem;
+      }
+      .eks-cluster-card {
+        background-color: #f1f5f9;
+        border: 1px solid #cbd5e1;
+        padding: 1.5rem;
+        border-radius: 0.5rem;
+      }
+      .namespace-card {
+        padding: 1rem;
+        border-radius: 0.5rem;
+        border-width: 2px;
+      }
+      .traffic-arrow {
+        font-size: 2rem;
+        line-height: 1;
+      }
+    </style>
+  </head>
+  <body class="p-4 sm:p-6 lg:p-8">
+    <div class="max-w-7xl mx-auto">
+      <h1 class="text-3xl font-bold text-center text-gray-800 mb-2">
+        Guide to Multi-Tenancy & Environments
+      </h1>
+      <p class="text-center text-gray-500 mb-8">
+        How we isolate tenants and separate development from production.
+      </p>
+
+      <!-- Glossary -->
+      <div class="card">
+        <h2 class="card-title">Key Terms to Know</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div>
+            <h3 class="font-semibold text-gray-800">Namespace</h3>
+            <p class="text-sm">
+              A "virtual cluster" inside a physical Kubernetes cluster. It
+              provides a scope for names and a way to attach authorization and
+              policies to a subsection of the cluster.
+            </p>
+          </div>
+          <div>
+            <h3 class="font-semibold text-gray-800">Ingress / Egress</h3>
+            <p class="text-sm">
+              <b>Ingress:</b> Network traffic that originates from outside the
+              namespace and comes <b>INTO</b> it.<br /><b>Egress:</b> Network
+              traffic that originates from inside the namespace and goes
+              <b>OUT</b> of it.
+            </p>
+          </div>
+          <div>
+            <h3 class="font-semibold text-gray-800">Network Policy</h3>
+            <p class="text-sm">
+              A set of rules, like a firewall, that controls which pods are
+              allowed to communicate with each other and other network
+              endpoints.
+            </p>
+          </div>
+          <div>
+            <h3 class="font-semibold text-gray-800">Default-Deny</h3>
+            <p class="text-sm">
+              A security posture where no network traffic is allowed unless it
+              is explicitly permitted by a Network Policy. We use this to lock
+              down namespaces.
+            </p>
+          </div>
+          <div>
+            <h3 class="font-semibold text-gray-800">RBAC</h3>
+            <p class="text-sm">
+              (Role-Based Access Control) A method of regulating access to
+              computer or network resources based on the roles of individual
+              users within an enterprise.
+            </p>
+          </div>
+          <div>
+            <h3 class="font-semibold text-gray-800">GitOps</h3>
+            <p class="text-sm">
+              The practice of managing infrastructure and application
+              configurations in Git, using it as the single source of truth, and
+              applying updates automatically.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Multi-Tenancy -->
+      <div class="card">
+        <h2 class="card-title">Part 1: Multi-Tenancy with Namespaces</h2>
+        <p class="mb-6">
+          We use a "Namespace per Tenant" model to isolate tenants within a
+          single EKS cluster. This creates strong security and resource
+          boundaries.
+        </p>
+        <div class="eks-cluster-card">
+          <p class="font-bold text-center text-gray-700 mb-4">
+            EKS Kubernetes Cluster
+          </p>
+          <div class="grid grid-cols-1 lg:grid-cols-3 items-center gap-6">
+            <!-- Tenant A -->
+            <div class="namespace-card border-blue-500 bg-blue-50">
+              <h3 class="font-bold text-lg text-blue-800 text-center">
+                BoFA Namespace
+              </h3>
+              <div class="mt-4 space-y-2 text-center text-sm">
+                <div class="bg-white p-2 rounded border">n8n Main Pod</div>
+                <div class="bg-white p-2 rounded border">n8n Worker Pod</div>
+                <div class="bg-white p-2 rounded border">Valkey Pod</div>
+              </div>
+            </div>
+
+            <!-- Isolation Barrier -->
+            <div class="text-center">
+              <svg
+                class="h-16 w-16 text-red-500 mx-auto"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"
+                />
+              </svg>
+              <h4 class="font-bold mt-2">Network Isolation</h4>
+              <p class="text-xs text-gray-500">
+                Default-Deny policies prevent communication between namespaces.
+              </p>
+            </div>
+
+            <!-- Tenant B -->
+            <div class="namespace-card border-green-500 bg-green-50">
+              <h3 class="font-bold text-lg text-green-800 text-center">
+                Wells Fargo Namespace
+              </h3>
+              <div class="mt-4 space-y-2 text-center text-sm">
+                <div class="bg-white p-2 rounded border">n8n Main Pod</div>
+                <div class="bg-white p-2 rounded border">n8n Worker Pod</div>
+                <div class="bg-white p-2 rounded border">Valkey Pod</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Database Isolation -->
+          <div class="mt-8 grid grid-cols-1 lg:grid-cols-3 items-start gap-6">
+            <div class="text-center">
+              <svg
+                class="h-12 w-12 text-blue-700 mx-auto"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0-2.21 3.582-4 8-4s8 1.79 8-4M12 11v10"
+                />
+              </svg>
+              <p class="font-semibold mt-2">Aurora DB (BoFA)</p>
+              <div class="h-1 w-full bg-blue-300 rounded-full mt-4"></div>
+              <p class="traffic-arrow text-blue-500">↑</p>
+              <p class="text-xs text-gray-500">
+                Private network connection allowed ONLY from BoFA Namespace
+              </p>
+            </div>
+            <div class="text-center pt-8">
+              <h4 class="font-bold text-xl">Database Isolation</h4>
+              <p class="text-sm text-gray-500">
+                Each tenant gets a dedicated Aurora PostgreSQL cluster, ensuring
+                data is never shared.
+              </p>
+            </div>
+            <div class="text-center">
+              <svg
+                class="h-12 w-12 text-green-700 mx-auto"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0-2.21 3.582-4 8-4s8 1.79 8-4M12 11v10"
+                />
+              </svg>
+              <p class="font-semibold mt-2">Aurora DB (Wells Fargo)</p>
+              <div class="h-1 w-full bg-green-300 rounded-full mt-4"></div>
+              <p class="traffic-arrow text-green-500">↑</p>
+              <p class="text-xs text-gray-500">
+                Private network connection allowed ONLY from Wells Fargo
+                Namespace
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Multi-Environment -->
+      <div class="card">
+        <h2 class="card-title">Part 2: Handling Different Environments</h2>
+        <p class="mb-6">
+          We use separate AWS Accounts for Development and Production. This
+          provides the strongest possible isolation for infrastructure, data,
+          and security.
+        </p>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <!-- Dev Account -->
+          <div class="aws-account-card border-cyan-500 bg-cyan-50">
+            <h3 class="font-bold text-xl text-cyan-800 text-center">
+              Development / QA AWS Account
+            </h3>
+            <p class="text-sm text-center text-cyan-700 mt-2">
+              For testing and development. Uses manual sync policies.
+            </p>
+            <div class="eks-cluster-card mt-4">
+              <p class="font-bold text-center">Dev EKS Cluster</p>
+              <p class="text-sm text-center">
+                Contains `n8n-tenant-alpha-dev` namespace
+              </p>
+            </div>
+          </div>
+          <!-- Prod Account -->
+          <div class="aws-account-card border-purple-500 bg-purple-50">
+            <h3 class="font-bold text-xl text-purple-800 text-center">
+              Production AWS Account
+            </h3>
+            <p class="text-sm text-center text-purple-700 mt-2">
+              For live customer data. Uses automated sync policies.
+            </p>
+            <div class="eks-cluster-card mt-4">
+              <p class="font-bold text-center">Prod EKS Cluster</p>
+              <p class="text-sm text-center">
+                Contains `n8n-tenant-alpha` namespace
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Orchestration -->
+        <div class="mt-8 text-center">
+          <h4 class="font-bold text-xl mb-4">Orchestrated by GitOps</h4>
+          <div
+            class="flex flex-col md:flex-row justify-center items-center gap-8"
+          >
+            <div class="text-center">
+              <p class="font-semibold">Terraform</p>
+              <p class="text-sm">
+                Uses different state files (`dev.tfstate`, `prod.tfstate`) to
+                deploy infrastructure to the correct account.
+              </p>
+            </div>
+            <p class="text-4xl text-gray-300">+</p>
+            <div class="text-center">
+              <p class="font-semibold">ArgoCD</p>
+              <p class="text-sm">
+                Uses different Application manifests (`app-dev.yaml`,
+                `app-prod.yaml`) to deploy the application to the correct
+                cluster/namespace.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
